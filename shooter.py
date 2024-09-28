@@ -33,12 +33,10 @@ while running:
             running = False
         hero.on_event(event)
             
-    collided_mobs = pygame.sprite.spritecollide(hero, enemies, False)
-    hits = pygame.sprite.groupcollide(enemies, hero.bullets, True, True)
+    hits = pygame.sprite.groupcollide(enemies, hero.fireballs, True, True)
     for hit in hits:
         mob = enemy.Enemy([all_sprites, enemies])
-    for mob in collided_mobs:
-        print("player collided with enemy!")
+        
     screen.fill((BLACK))
     screen.blit(background, background_rect)
     all_sprites.draw(screen)
