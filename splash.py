@@ -1,0 +1,43 @@
+import sys
+import pygame
+
+def load_menu(screen: pygame.Surface):
+    splash = pygame.Surface([500, 500])
+    font = pygame.font.SysFont('arial', 20)
+    buttons = [
+        (160, 140, 'Play', 0), #  x=160, y=140, text='Play', position = 0
+        (160, 210, 'Exit', 1)  #  x=160, y=210, text='Exit', position = 1
+    ]
+    pygame.mouse.set_visible(True)
+    
+    done = False
+    item = -1
+    while not done:
+        splash.fill([0, 0, 0])
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                print(item)
+                if item == 0: # click Play button
+                    done = True
+                elif item == 1: # click Exit button
+                    pygame.quit()
+                    sys.exit()
+        pointer = pygame.mouse.get_pos()
+        for button in buttons:
+            if (pointer[0] > button[0] and pointer[0] < button[0] + 155 and 
+                pointer[1] > button[1] and pointer[1] < button[1] + 50):
+                item = button[3]
+        
+        for button in buttons:
+            if item == button[3]:
+                btn = font.render(button[2], 1, (255, 0, 0))
+            else:
+                btn = font.render(button[2], 1, (255, 255, 255))
+            splash.blit(btn, [button[0], button[1]])
+            
+        screen.blit(splash, [0, 0])
+        pygame.display.flip()
+             

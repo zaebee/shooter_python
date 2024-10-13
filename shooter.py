@@ -2,6 +2,7 @@ import os
 import pygame
 import player
 import enemy
+import splash
 
 WIDTH = 500
 HEIGHT = 500
@@ -11,10 +12,13 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 game_folder = os.path.dirname(__file__)
-background = pygame.image.load(os.path.join(game_folder, 'images/kosmos.png'))
+background = pygame.image.load(os.path.join(
+    game_folder, 'images/kosmos.png'))
 background_rect = background.get_rect()
 
 pygame.init()
+
+splash.load_menu(screen)
 
 all_sprites = pygame.sprite.Group()
 enemies = pygame.sprite.Group()
@@ -26,6 +30,7 @@ for i in range(5):
 clock = pygame.time.Clock()
 
 running = True
+# splash.load_menu(screen)
 while running:
     all_sprites.update(screen=screen)
     for event in pygame.event.get():
