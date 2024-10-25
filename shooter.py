@@ -3,6 +3,7 @@ import pygame
 import player
 import enemy
 import splash
+import explosion
 
 WIDTH = 500
 HEIGHT = 500
@@ -30,7 +31,13 @@ for i in range(5):
 clock = pygame.time.Clock()
 
 running = True
-# splash.load_menu(screen)
+pygame.mixer.music.load(
+    os.path.join(game_folder, 'sounds/song18.mp3'))
+pygame.mixer.music.set_volume(0.1)
+pygame.mixer.music.play(-1)
+
+score = 0
+
 while running:
     all_sprites.update(screen=screen)
     for event in pygame.event.get():
@@ -40,10 +47,13 @@ while running:
             
     hits = pygame.sprite.groupcollide(enemies, hero.fireballs, True, True)
     for hit in hits:
+        score += 1
+        explosion.Explosion(hit.rect.centerx, hit.rect.centery, [all_sprites])
         mob = enemy.Enemy([all_sprites, enemies])
         
     screen.fill((BLACK))
     screen.blit(background, background_rect)
+    splash.load_score(screen, score)
     all_sprites.draw(screen)
     pygame.display.flip()
     clock.tick(FPS)
