@@ -15,10 +15,10 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.image.load(
             os.path.join(game_folder, 'images/hero.png'))
         self.rect = self.image.get_rect()
-        self.rect.centerx = WIDTH / 2 # 250 -
+        self.rect.centerx = WIDTH / 2
         self.rect.bottom = HEIGHT - 10
         self.speedx = 0
-    
+
     def on_event(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
@@ -28,7 +28,6 @@ class Player(pygame.sprite.Sprite):
             if event.key == pygame.K_SPACE:
                 self.shoot()
         if event.type == pygame.KEYUP:
-            
             if event.key == pygame.K_LEFT:
                 self.speedx = 0
             if event.key == pygame.K_RIGHT:
@@ -40,7 +39,6 @@ class Player(pygame.sprite.Sprite):
         if self.rect.left < 0:
             self.rect.left = 0
         self.rect.x += self.speedx
-        # self.speedx = 0
     
     def shoot(self):
         fireball = weapon.Fireball(self.rect.centerx, self.rect.top, *self.groups)

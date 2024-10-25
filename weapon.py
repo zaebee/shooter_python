@@ -10,6 +10,7 @@ class Fireball(pygame.sprite.Sprite):
         self.speedy = -10
         self.angle = 30
         self.pos = pygame.math.Vector2(x, y)
+        # self.sound = pygame.mixer.Sound('sounds/boom.wav')
         self.image = pygame.image.load(
             os.path.join(game_folder, 'images/fireball.png'))
         self.rect = self.image.get_rect(center=self.pos)

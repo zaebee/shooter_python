@@ -17,13 +17,11 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.x = random.randrange(0, 500)
         self.rect.y = random.randrange(0, 50)
         self.speedx = random.randrange(-3, 3)
-        self.speedy = random.randrange(1, 3)
+        self.speedy = random.randrange(1, 5)
         
     def update(self, *args, **kwargs):
-        screen = kwargs.get('screen')
         self.rect.x += self.speedx
         self.rect.y += self.speedy
         if self.rect.top > HEIGHT + 10 or self.rect.left < -25 or self.rect.right > WIDTH + 20:
             self.rect.x = random.randrange(WIDTH - self.rect.width)
             self.rect.y = random.randrange(-100, -40)
-            self.speedy = random.randrange(1, 8)
