@@ -2,7 +2,7 @@ import sys
 import pygame
 
 def load_menu(screen: pygame.Surface):
-    splash = pygame.Surface([500, 500])
+    splash = pygame.Surface([800, 800])
     font = pygame.font.SysFont('arial', 20)
     buttons = [
         (160, 140, 'Play', 0), #  x=160, y=140, text='Play', position = 0
@@ -43,9 +43,21 @@ def load_menu(screen: pygame.Surface):
 
        
 def load_score(screen, score):
-    surface = pygame.Surface([500, 40]) # создаем поверхность 500х40
+    surface = pygame.Surface([400, 40]) # создаем поверхность 500х40
     font = pygame.font.SysFont('arial', 20) # создаем шрифт 'arial' размером 20px
     surface.fill([131, 35, 35]) # заливаем нашу поверхность красным цветом
+    surface.set_alpha(128)
     screen.blit(surface, [0, 0]) # отображаем поверхность на экране в точке 0px, 0px
     text = font.render(f'Score: {score}', 1, [255, 0, 0]) # создаем наш текст с очками
     screen.blit(text, [10, 10]) # отображаем текст на поверхности в точке 10px, 10px
+    
+    
+def load_health(screen, health):
+    """"""
+    surface = pygame.Surface([400, 40]) # создаем поверхность 500х40
+    font = pygame.font.SysFont('arial', 20) # создаем шрифт 'arial' размером 20px
+    surface.fill([131, 35, 35]) # заливаем нашу поверхность красным цветом
+    surface.set_alpha(128)
+    screen.blit(surface, [400, 0]) # отображаем поверхность на экране в точке 0px, 0px
+    text = font.render(f'Health: {health}', 1, [255, 0, 0]) # создаем наш текст с очками
+    screen.blit(text, [440, 10]) # отображаем текст на поверхности в точке 10px, 10px

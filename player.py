@@ -2,21 +2,23 @@ import os
 import pygame
 import weapon
 
-WIDTH = 500
-HEIGHT = 500
+WIDTH = 800
+HEIGHT = 800
 game_folder = os.path.dirname(__file__)
 
 class Player(pygame.sprite.Sprite):
+    health: int = 10
+    skin: str = 'ship_orange.png'
     
     def __init__(self, *groups):
         super().__init__(*groups)
         self.groups = groups
         self.fireballs = pygame.sprite.Group()
         self.image = pygame.image.load(
-            os.path.join(game_folder, 'images/hero.png'))
+            os.path.join(game_folder, f'images/{self.skin}'))
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH / 2
-        self.rect.bottom = HEIGHT - 10
+        self.rect.bottom = HEIGHT - 50
         self.speedx = 0
 
     def on_event(self, event):
@@ -41,5 +43,5 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += self.speedx
     
     def shoot(self):
-        fireball = weapon.Fireball(self.rect.centerx, self.rect.top, *self.groups)
-        self.fireballs.add(fireball)
+        self.fireballs.add(weapon.Fireball(
+            self.rect.centerx, self.rect.top, *self.groups))

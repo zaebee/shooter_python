@@ -10,8 +10,7 @@ class Explosion(pygame.sprite.Sprite):
     def __init__(self, x, y, *groups):
         super().__init__(*groups)
         self.frames = animator.load_sprite_sheet(
-            os.path.join(game_folder, 'images', 'explosion.png'),
-            96, 96)
+            os.path.join(game_folder, 'images', 'explosion.png'), 96, 96)
         self.current_frame = 0
         self.last_update = 0
         self.animation_speed = 100 # milliseconds

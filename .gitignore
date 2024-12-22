@@ -2,3 +2,10 @@
 *.json
 cache/
 __pycache__
+.vs/
+.vscode/
+images/bg
+images/GalagianArtwork
+images/enemy
+images/lasers
+images/spaceship
