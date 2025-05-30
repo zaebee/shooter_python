@@ -1,5 +1,6 @@
 import os
 import pygame
+
 import weapon
 
 WIDTH = 800
@@ -12,12 +13,13 @@ class Player(pygame.sprite.Sprite):
     
     def __init__(self, *groups):
         super().__init__(*groups)
-        self.groups = groups
+        self.groups = groups  # type: ignore
         self.fireballs = pygame.sprite.Group()
         self.image = pygame.image.load(
             os.path.join(game_folder, f'images/{self.skin}'))
+        
         self.rect = self.image.get_rect()
-        self.rect.centerx = WIDTH / 2
+        self.rect.centerx = WIDTH / 2  # type: ignore
         self.rect.bottom = HEIGHT - 50
         self.speedx = 0
 
@@ -29,11 +31,8 @@ class Player(pygame.sprite.Sprite):
                 self.speedx = 8
             if event.key == pygame.K_SPACE:
                 self.shoot()
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT:
-                self.speedx = 0
-            if event.key == pygame.K_RIGHT:
-                self.speedx = 0
+        elif event.type == pygame.KEYUP:
+            self.speedx = 0
     
     def update(self, *args, **kwargs):
         if self.rect.right > WIDTH:
@@ -43,5 +42,5 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += self.speedx
     
     def shoot(self):
-        self.fireballs.add(weapon.Fireball(
+        self.fireballs.add(weapon.Bullet(
             self.rect.centerx, self.rect.top, *self.groups))

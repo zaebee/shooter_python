@@ -3,7 +3,7 @@ import pygame
 
 game_folder = os.path.dirname(__file__)
 
-class Fireball(pygame.sprite.Sprite):
+class Bullet(pygame.sprite.Sprite):
     skin: str = 'laser.png'
     
     def __init__(self, x, y, *groups):

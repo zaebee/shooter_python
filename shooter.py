@@ -1,9 +1,12 @@
 import os
+import random
 import pygame
+
 import player
 import enemy
 import splash
 import explosion
+# TODO: destroy enemy and show explosion when laser is collided with enemy.
 
 
 class Game:
@@ -23,6 +26,9 @@ class Game:
         
         self.all_sprites = pygame.sprite.Group()
         self.hero = player.Player(self.all_sprites)
+        # Added enemies 
+        for _ in range(5):
+            enemy.Enemy(self.all_sprites)
         
     def start(self):
         """Starts game cycle."""
