@@ -6,6 +6,7 @@ import animator
 import config
 
 class Enemy(pygame.sprite.Sprite):
+    base_max_speed = 4
     
     def __init__(self, *groups, **kwargs):
         super().__init__(*groups)
@@ -18,8 +19,8 @@ class Enemy(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = random.randrange(0, 500)
         self.rect.y = random.randrange(0, 50)
-        self.speedx = random.randrange(-4, 4) or -1
-        self.speedy = random.randrange(2, 4)
+        self.speedx = random.randrange(-2, 2) or -1
+        self.speedy = random.randrange(self.base_max_speed - 2, self.base_max_speed)
         
     def _load_image(self, name):
         self.image = pygame.image.load(os.path.join(config.game_folder, name))
