@@ -34,6 +34,25 @@ class Game:
         for _ in range(5):
             enemy.Enemy(self.all_sprites, self.enemies)
 
+    def check_collision(self):
+        enemy_collided = pygame.sprite.spritecollideany(self.hero, self.enemies)
+        if enemy_collided:
+            enemy_collided.kill()
+            explosion.Explosion(
+                self.hero.rect.centerx, self.hero.rect.centery, self.all_sprites
+            )
+        for laser in self.hero.fireballs:
+            # TODO: destroy enemy when collided with laser -> create explosion.
+            enemy_collided = pygame.sprite.spritecollideany(
+                laser, self.enemies)
+            if enemy_collided:
+                enemy_collided.kill()
+                laser.kill()
+                explosion.Explosion(
+                    enemy_collided.rect.centerx,
+                    enemy_collided.rect.centery,
+                    self.all_sprites)
+    
     def start(self):
         """Starts game cycle."""
         while self.RUNNING:
@@ -46,27 +65,16 @@ class Game:
 
             self.all_sprites.update()
             self.all_sprites.draw(self.screen)
-            enemy_collided = pygame.sprite.spritecollideany(self.hero, self.enemies)
-            if enemy_collided:
-                enemy_collided.kill()
-                explosion.Explosion(
-                    self.hero.rect.centerx, self.hero.rect.centery, self.all_sprites
-                )
-            for laser in self.hero.fireballs:
-                # TODO: destroy enemy when collided with laser -> create explosion.
-                enemy_collided = pygame.sprite.spritecollideany(
-                    laser, self.enemies)
-                if enemy_collided:
-                    enemy_collided.kill()
-                    laser.kill()
-                    explosion.Explosion(
-                        enemy_collided.rect.centerx,
-                        enemy_collided.rect.centery,
-                        self.all_sprites)
-
+            
+            self.check_collision()
+            
+            splash.load_health(self.screen, self.hero.health)
+            splash.load_score(self.screen, self.hero.score)
+            
             pygame.display.flip()
             self._clock.tick(self.FPS)
 
 
 game = Game()
+splash.load_menu(game.screen)
 game.start()

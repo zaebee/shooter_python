@@ -58,6 +58,6 @@ def load_health(screen, health):
     font = pygame.font.SysFont('arial', 20) # создаем шрифт 'arial' размером 20px
     surface.fill([131, 35, 35]) # заливаем нашу поверхность красным цветом
     surface.set_alpha(128)
-    screen.blit(surface, [400, 0]) # отображаем поверхность на экране в точке 0px, 0px
+    screen.blit(surface, [400, 0]) # отображаем поверхность на экране в точке 400px, 0px
     text = font.render(f'Health: {health}', 1, [255, 0, 0]) # создаем наш текст с очками
     screen.blit(text, [440, 10]) # отображаем текст на поверхности в точке 10px, 10px

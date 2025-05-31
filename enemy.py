@@ -9,7 +9,7 @@ class Enemy(pygame.sprite.Sprite):
     
     def __init__(self, *groups, **kwargs):
         super().__init__(*groups)
-        self.groups = groups
+        self.groups = groups # type: ignore
         self.max_health = 3
         self.health = 3
         self.filename = kwargs.get('filename', 'any.png')
