@@ -49,17 +49,18 @@ class Boss(Enemy):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.frames = animator.load_sprite_sheet(
-            os.path.join(config.game_folder, 'images', 'nave.png'), 128, 160)
+            os.path.join(config.game_folder, 'images', 'egg.png'), 128, 160)
         self.current_frame = 0
         self.last_update = 0
         self.animation_speed = 100 # milliseconds
         self.image = self.frames[self.current_frame]
         self.rect = self.image.get_rect()
         self.rect.x = 200
-        self.rect.y = 400
+        self.rect.y = 50
         
     def update(self, *args, **kwargs):
         current_time = pygame.time.get_ticks()
+        self.rect.x += self.speedx
         if current_time - self.last_update > self.animation_speed:
             self.last_update = current_time
             self.current_frame = (self.current_frame + 1) % len(self.frames)
